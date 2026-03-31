@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Football Scout AI</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/marked/11.1.0/marked.min.js"></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <span class="logo">⚽ Scout AI</span>
+        <button class="icon-btn" id="toggleSidebar" title="Toggle sidebar">◀</button>
+      </div>
+
+      <div class="memory-section" id="memorySection"></div>
+
+      <div class="history-label">Recent Sessions</div>
+      <div class="session-list" id="sessionList">
+        <div class="empty-state">No sessions yet</div>
+      </div>
+    </aside>
+
+    <!-- Main -->
+    <main class="main">
+      <header class="header">
+        <h1>Football Scout AI</h1>
+        <p class="subtitle">Deep research. Verified stats. Real scouting reports.</p>
+      </header>
+
+      <!-- Search -->
+      <div class="search-box">
+        <textarea
+          id="queryInput"
+          placeholder="e.g. Should Arsenal sign Florian Wirtz? or Compare Salah vs Saka this season"
+          rows="2"
+        ></textarea>
+        <div class="search-controls">
+          <div class="mode-toggle">
+            <button class="mode-btn active" id="modeDeep" data-mode="deep">Deep (60-90s)</button>
+            <button class="mode-btn" id="modeQuick" data-mode="quick">Quick (30s)</button>
+          </div>
+          <button class="btn-primary" id="searchBtn" onclick="startResearch()">Scout It</button>
+        </div>
+      </div>
+
+      <!-- Example queries -->
+      <div class="examples">
+        <span class="examples-label">Try:</span>
+        <button class="chip" onclick="setQuery('Should Arsenal sign Florian Wirtz?')">Should Arsenal sign Florian Wirtz?</button>
+        <button class="chip" onclick="setQuery('Compare Salah vs Saka this season')">Compare Salah vs Saka</button>
+        <button class="chip" onclick="setQuery('Is Pedri worth signing for Manchester City?')">Is Pedri worth signing for City?</button>
+        <button class="chip" onclick="setQuery('Scouting report on Lamine Yamal')">Scouting report on Lamine Yamal</button>
+      </div>
+
+      <!-- Live Activity Feed -->
+      <div class="activity-feed" id="activityFeed" style="display:none">
+        <div class="feed-header">
+          <span class="feed-title">🔍 Research Activity</span>
+          <div class="spinner" id="spinner"></div>
+        </div>
+        <div class="feed-log" id="feedLog"></div>
+      </div>
+
+      <!-- Report Output -->
+      <div class="report-container" id="reportContainer" style="display:none">
+        <div class="report-header">
+          <h2>Scouting Report</h2>
+          <div class="report-actions">
+            <button class="btn-secondary" onclick="copyReport()">📋 Copy Markdown</button>
+            <button class="btn-secondary" onclick="newSearch()">🔄 New Search</button>
+          </div>
+        </div>
+        <div class="audit-banner" id="auditBanner" style="display:none"></div>
+        <div class="report-body" id="reportBody"></div>
+      </div>
+
+      <!-- Error state -->
+      <div class="error-container" id="errorContainer" style="display:none">
+        <div class="error-icon">⚠️</div>
+        <div class="error-message" id="errorMessage"></div>
+        <button class="btn-secondary" onclick="newSearch()">Try Again</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
