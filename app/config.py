@@ -13,7 +13,7 @@ class Settings(BaseSettings):
 
     # Server
     port: int = 8000
-    cors_origins: List[str] = ["http://localhost:3000"]
+    cors_origins: str = "http://localhost:3000"
 
     # Database
     database_path: str = "./data/sessions.db"
@@ -26,9 +26,20 @@ class Settings(BaseSettings):
     # Mode
     default_mode: str = "deep"
 
+    def get_cors_origins(self) -> List[str]:
+        """Parse cors_origins whether it's a string or JSON array."""
+        import json
+        try:
+            parsed = json.loads(self.cors_origins)
+            if isinstance(parsed, list):
+                return parsed
+            return [str(parsed)]
+        except Exception:
+            return [o.strip() for o in self.cors_origins.split(",")]
+
     class Config:
         env_file = ".env"
         env_file_encoding = "utf-8"
 
 
-settings = Settings()
+settings = Settings() #type: ignore
