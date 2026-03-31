@@ -1,6 +1,6 @@
 // ── Config ───────────────────────────────────────────────────────────────────
 
-const API_BASE = "http://127.0.0.1:8000"; // ← Change to your Railway URL
+const API_BASE = "https://football-scout-ai-production.up.railway.app";// ← Change to your Railway URL
 // For local dev: const API_BASE = "http://localhost:8000";
 
 // ── State ─────────────────────────────────────────────────────────────────────
